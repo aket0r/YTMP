@@ -1,0 +1,218 @@
+:root {
+    --between: 20px;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: #222;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-size: 3vw;
+}
+
+input {
+    margin: 0;
+    padding: 0;
+    border: none;
+    background-color: #333;
+    outline: none;
+    font-size: 2rem;
+    color: #fff;
+}
+
+body {
+    background-color: #222;
+    font-family: sans-serif;
+}
+
+#navigation ul {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0;
+}
+
+#navigation ul li {
+    list-style: none;
+    color: #fff;
+}
+
+#navigation ul li#running-time {
+    color: lime;
+    margin-left: 25px;
+    font-size: 1.2rem;
+    user-select: none;
+}
+
+#navigation ul li button {
+    background-color: #444;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 0;
+    outline: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: 0 1px;
+    user-select: none;
+}
+#navigation ul li button:first-child {
+    margin-left: 0;
+}
+
+#navigation ul li button:active {
+    background-color: #333;
+}
+
+main {
+    margin: var(--between);
+}
+
+main #main-section {
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main #main-section .settings-control-panel {
+    margin: 0 auto;
+    margin: var(--between) 0;
+}
+
+main #main-section .settings-control-panel input,
+main #main-section .settings-control-panel button {
+    max-width: 90px;
+    text-align: center;
+    border: none;
+    border-radius: 0;
+    padding: 15px 25px;
+    font-size: 2rem;
+    user-select: none;
+    color: #fff;
+    font-family: fantasy;
+}
+
+main #main-section .settings-control-panel button {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    text-align: center;
+}
+main #main-section .settings-control-panel button:active {
+    background-color: #2b2b2b;
+}
+
+main #main-section .settings-control-panel input:disabled {
+    color: #ddd;
+    user-select: none;
+    cursor: not-allowed;
+}
+
+main #processes {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+main #processes .search-processes #processes-value {
+    font-weight: 100;
+    padding: 10px;
+    font-size: 1.5rem;
+    color: #ddd;
+}
+
+main #processes .search-processes span {
+    color: #ddd;
+    background-color: #333;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    user-select: none;
+}
+
+main #processes .get-processes table {
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    width: 30rem;
+    padding: 5px;
+    color: #ddd;
+}
+
+main #processes .get-processes table .loading td {
+    color: #fff;
+    border: none;
+}
+
+main #processes .get-processes table .loading td h4 {
+    font-weight: 100;
+}
+
+main #processes .get-processes table tr td input {
+    accent-color: lime;
+}
+
+main #processes .get-processes table tr.hidden {
+    display: none;
+}
+
+main #processes .get-processes table tr td {
+    text-align: center;
+    color: #ddd;
+    max-width: 100px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+main #processes .get-processes table tr td {
+    color: crimson;
+    text-align: start;
+}
+
+main #processes .get-processes table tr.title-container td {
+    color: #ddd !important;
+}
+
+main #processes .get-processes table tr td:nth-child(3) {
+    font-size: 0.7rem;
+}
+
+main #processes .get-processes table tr:first-child td:nth-child(2) {
+    color: #ddd;
+}
+
+main #processes .get-processes table tr.active td {
+    color: lime;
+}
+
+main #processes .get-processes table tr td {
+    border: 1px solid #ddd;
+    padding: 5px;
+}

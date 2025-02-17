@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "electron": "^34.1.1",
+    "electron-packager": "^17.1.2",
+    "fs": "^0.0.1-security",
+    "kill-port-process": "^3.2.1",
+    "kill-process": "^1.0.2",
+    "node-processlist": "^1.0.2",
+    "open-file": "^1.0.0",
+    "open-file-text-editor": "^0.0.1",
+    "path": "^0.12.7",
+    "process": "^0.11.10",
+    "ps-list": "^8.1.1",
+    "read-text-file": "^1.1.0",
+    "terminate": "^2.8.0"
+  },
+  "name": "time-tracker",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager . YTMP --overwrite --asar=true --platform=win32 --arch=ia32 --icon=src/assets/icons/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"YTM Program\""
+  },
+  "author": "aket0r",
+  "license": "ISC",
+  "description": ""
+}

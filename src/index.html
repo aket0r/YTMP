@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="assets/icons/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.css">
+    <title>Your Time Management Program</title>
+</head>
+<body>
+    <nav id="navigation">
+        <ul>
+            <li class="button-element">
+                <button id="logs">Logs</button>
+            </li>
+            <li id="running-time" title="started at"></li>
+        </ul>
+    </nav>
+
+    <main id="main">
+        <section id="main-section">
+            <div class="settings-control-panel">
+                <button id="start-stop">
+                    <i class="fa fa-play" aria-hidden="true"></i>
+                </button>
+                <input type="text" class="control-panel cp--hours" value="06" name="hours" disabled>
+                <input type="text" class="control-panel cp--minutes" value="00" name="minutes" disabled>
+                <input type="text" class="control-panel cp--seconds" value="00" name="seconds" disabled>
+            </div>
+        </section>
+
+        <section id="processes">
+            <div class="search-processes">
+                <input type="text" id="processes-value" placeholder="processes...">
+                <span class="processes-length">0</span>
+            </div>
+            <div class="get-processes">
+                <table>
+                    <tr class="loading">
+                        <td>
+                            <h4>loading...</h4>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- scripts -->
+     <script src="js/getProcess.js"></script>
+     <script src="js/pushProcess.js"></script>
+     <script src="js/observer.js"></script>
+     <script src="js/search.js"></script>
+     <script src="js/clickTracking.js"></script>
+     <script src="js/timer.js"></script>
+</body>
+</html> 
