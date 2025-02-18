@@ -132,7 +132,6 @@ function startTime() {
 function shutDownProcesses(pid) {
     fs.writeFileSync(`src/processes/${pid}__taskkill.bat`, `taskkill /PID ${pid}`, () => {});
     setTimeout(() => {
-        // child_process.exec(`start %SystemRoot%/system32/WindowsPowerShell/v1.0/powershell.exe -NoExit -Command Start-Process '${__dirname.replaceAll("\\", '/').replace('resources/app.asar/src', '')}/src/processes/${pid}__taskkill.bat'`, function(error, stdout, stderr){});
         child_process.exec(`start %SystemRoot%/system32/WindowsPowerShell/v1.0/powershell.exe Start-Process '${__dirname.replaceAll("\\", '/')?.replace('/resources/app.asar', '')}/src/processes/${pid}__taskkill.bat'`, function(error, stdout, stderr){});
     }, 3000);
 
@@ -155,7 +154,7 @@ async function observer() {
     for (const prc of processes) {
         await processList.getProcessById(prc.pid)
             .then(res => {
-                if (res && !executed) { // Вызываем `startTime()` только если ещё не запускали в этой итерации
+                if (res && !executed) {
                     if(!isDone) {
                         startTime();
                     }
