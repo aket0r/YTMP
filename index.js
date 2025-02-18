@@ -5,6 +5,54 @@ const fs = require("fs");
 const os = require("os");
 const child_process = require("child_process");
 const actualVersion = '1.5.8b'
+function checkRequirementFiles() {
+    const isMainFolder = fs.existsSync(`src`);
+    if (!isMainFolder) {
+        fs.mkdirSync(`src`);
+    }
+
+    const folders = ['config', 'processes', 'logs'];
+    const files = [
+        { path: 'processes', name: 'processes.json', text: '[]' },
+        { path: 'logs', name: 'logs.txt', text: '' }
+    ];
+
+    for (const folder of folders) {
+        const isFolderCreated = fs.existsSync(`src/${folder}`);
+        if (!isFolderCreated) {
+            fs.mkdirSync(`src/${folder}`);
+        }
+    }
+
+    const configPath = 'src/config/config.json';
+
+    if (!fs.existsSync(configPath)) {
+        console.log("Файл config.json отсутствует, создаем новый.");
+        fs.writeFileSync(configPath, JSON.stringify({
+            ver: actualVersion,
+            collection: {
+                TIME_SECTION: [6, 0, 0]
+            },
+            running: new Date().toLocaleString()
+        }, null, '\t'));
+    } else {
+        console.log("Файл config.json уже существует, пропускаем создание.");
+    }
+
+    for (const file of files) {
+        const filePath = `src/${file.path}/${file.name}`;
+        if (!fs.existsSync(filePath)) {
+            fs.writeFileSync(filePath, file.text);
+        }
+    }
+}
+
+
+checkRequirementFiles();
+
+
+
+
 
 fs.readFile(`src/version.ver`, null, (error) => {
     if(error) {
@@ -13,18 +61,27 @@ fs.readFile(`src/version.ver`, null, (error) => {
 });
 
 function saveConfig(data = {h: 6, m: 0, s: 0}) {
-    setData('src/config/config.json', {
+    const object = {
         ver: actualVersion,
         collection: {
             TIME_SECTION: [data.h,data.m,data.s]
         },
         running: new Date().toLocaleString()
-    });
+    }
+    setData('src/config/config.json', object);
+
+    return object;
 }
 
-function getData(file) {
-    const buffer = fs.readFileSync(file);
-    const data = JSON.parse(buffer);
+function getData(file, object = []) {
+    let data;
+    try {
+        const buffer = fs.readFileSync(file);
+        data = JSON.parse(buffer);
+    } catch(e) {
+        console.log(e);
+        setData(file, object);
+    }
 
     return data;
 }
@@ -35,6 +92,7 @@ function setData(file, data) {
 
 
 let requirements = getData('src/config/config.json');
+
 let init = null;
 let isDone = false;
 function startTime() {
@@ -74,11 +132,8 @@ function startTime() {
 function shutDownProcesses(pid) {
     fs.writeFileSync(`src/processes/${pid}__taskkill.bat`, `taskkill /PID ${pid}`, () => {});
     setTimeout(() => {
-        child_process.exec(`start %SystemRoot%/system32/WindowsPowerShell/v1.0/powershell.exe Start-Process '${__dirname.replaceAll("\\", '/')}/src/processes/${pid}__taskkill.bat'`, function(error, stdout, stderr){
-            if(error) {
-                console.log(`%c[ERROR] %c${error} %cat %cgetProcess.js:%c33`, 'color: red;', 'color:yellow;', 'color: white;', 'color: royalblue;');
-            }
-        });
+        // child_process.exec(`start %SystemRoot%/system32/WindowsPowerShell/v1.0/powershell.exe -NoExit -Command Start-Process '${__dirname.replaceAll("\\", '/').replace('resources/app.asar/src', '')}/src/processes/${pid}__taskkill.bat'`, function(error, stdout, stderr){});
+        child_process.exec(`start %SystemRoot%/system32/WindowsPowerShell/v1.0/powershell.exe Start-Process '${__dirname.replaceAll("\\", '/')?.replace('/resources/app.asar', '')}/src/processes/${pid}__taskkill.bat'`, function(error, stdout, stderr){});
     }, 3000);
 
     setTimeout(() => {
@@ -86,6 +141,7 @@ function shutDownProcesses(pid) {
         fs.writeFileSync(`src/processes/processes.json`, JSON.stringify([], null, '\t'), () => {});
     }, 5000);
 }
+
 
 const processList = require('node-processlist');
 
@@ -187,7 +243,3 @@ async function createWindow() {
 
 app.on('ready', createWindow);
 app.on('window-all-closed', () => {});
-
-
-
-
