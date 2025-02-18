@@ -14,8 +14,11 @@ npm i electron
 npm i electron-packager
 npm i electron --save
 ```
+
+
 # Step 2
 ### Run ``build.bat`` (for debugging use ``start.bat``)
+![image](https://github.com/user-attachments/assets/28dd12cc-71b3-418c-b0b2-36f5885736ca)
 
 # Step 3
 ### Go in **release-builds/YTMP-win32-ia32** and run YTMP.exe
