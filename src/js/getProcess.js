@@ -1,6 +1,19 @@
 const fs = require("fs");
 const processList = require('node-processlist');
 const child_process = require("child_process");
+let actualVersion = getTxtFileData('src/version.ver');
+
+function saveConfig() {
+    setData('src/config/config.json', {
+        ver: '1.5.3',
+        collection: {
+            TIME_SECTION: [6,0,0]
+        },
+        running: new Date().toLocaleString()
+    });
+}
+
+let isWindowed = true;
 
 function setLogs(message) {
     const filename = 'src/logs/logs.txt';
@@ -8,6 +21,14 @@ function setLogs(message) {
         if (err) throw err;
         fs.writeFileSync(`src/logs/logs.txt`,  `${(data === "" ? data : data + '\n')}[${new Date().toLocaleString()}] ${message} \n`, () => {});
     });
+}
+
+async function getTxtFileData(filename) {
+    await fs.readFile(filename, 'utf8', function(err, data) {
+        if (err) throw err;
+        actualVersion = data;
+        return String(data);
+    });    
 }
 
 function getData(file) {
