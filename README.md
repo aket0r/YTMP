@@ -40,5 +40,5 @@ npm start
 ![image](https://github.com/user-attachments/assets/4d7c9989-fbe9-4fa8-a419-5085d6f18a9a)
 <br>
 > [!CAUTION]
-> To start the development environment, remove the comment (//) in the index.js file on line 52 and run start.bat
+> To start the development environment, remove the comment (//) in the index.js file on line 234 and run start.bat
 ![image](https://github.com/user-attachments/assets/dd1eb134-e352-4910-b60d-f7de8bbeb3f0)
